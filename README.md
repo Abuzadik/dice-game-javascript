@@ -1,6 +1,4 @@
-Here's a comprehensive description for your GitHub repository:
 
----
 
 ### Dice Game
 
@@ -49,10 +47,6 @@ To run this game locally, follow these steps:
    ```
 
 3. **Open `index.html` in your preferred browser**.
-
-#### Contribution
-
-Feel free to contribute to this project by opening issues or submitting pull requests. Any contributions that make the game better or introduce new features are welcome.
 
 #### License
 
