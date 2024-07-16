@@ -1,0 +1,86 @@
+/* style.css */
+
+body {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #333;
+    color: #fff;
+    margin: 0;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .players {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .player {
+    background-color: #f4f4f4;
+    color: #333;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .player-active {
+    background-color: #b90909;
+    border: 2px solid rgb(9, 255, 0);
+  }
+  
+  .dice {
+    align-items: center;
+    border: solid white;
+    width: 100px;
+    height: auto;
+    text-align: center;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .btn {
+    background-color: #f4f4f4;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn:hover {
+    background-color: #ddd;
+  }
+  
+  .current {
+    margin-top: 10px;
+  }
+  
+  .score {
+    font-size: 40px;
+    margin: 0;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+
+.player-winner{
+  background-color: rgb(47, 218, 47);
+  font-style: #fff
+}
