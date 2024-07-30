@@ -10,6 +10,7 @@ const newGameBtn = document.querySelector(".btnnew");
 const rollBtn = document.querySelector(".btnroll");
 const holdBtn = document.querySelector(".btnhold");
 const dice = document.querySelector(".dice");
+// const saveGame = document.querySelector('.btnsave');
 
 // Initialize game state variables
 let score, currentScore, activePlayer, playing;
@@ -20,18 +21,49 @@ let score, currentScore, activePlayer, playing;
  * Also updates the DOM to reflect these initial values.
  */
 function starter() {
-  score = [0, 0]; 
-  currentScore = 0; 
-  activePlayer = 0; 
-  playing = true; 
-  
+  score = [0, 0];
+  currentScore = 0;
+  activePlayer = 0;
+  playing = true;
+
   // Update the scores and current scores in the DOM
   score1_Element.textContent = 0;
   score2_Element.textContent = 0;
   current1_Element.textContent = 0;
   current2_Element.textContent = 0;
+
+  //reset localStorage
+  localStorage.clear();
+
 }
 starter();
+
+function loadGame() {
+  const savedGameState = localStorage.getItem("gameState");
+  if (savedGameState) {
+    const gameState = JSON.parse(savedGameState);
+    score = gameState.score;
+    currentScore = gameState.currentScore;
+    activePlayer = gameState.activePlayer;
+    playing = gameState.playing;
+
+    // Update the scores and current scores in the DOM
+    score1_Element.textContent = score[0];
+    score2_Element.textContent = score[1];
+    current1_Element.textContent = activePlayer === 0 ? currentScore : 0;
+    current2_Element.textContent = activePlayer === 1 ? currentScore : 0;
+
+    // Set the active player class
+    if (activePlayer === 0) {
+      player1_Element.classList.add("player-active");
+      player2_Element.classList.remove("player-active");
+    } else {
+      player1_Element.classList.remove("player-active");
+      player2_Element.classList.add("player-active");
+    }
+  }
+}
+
 
 /**
  * Event listener for the "Roll Dice" button.
@@ -55,6 +87,8 @@ rollBtn.addEventListener("click", function () {
       // If the roll is 1, switch to the other player
       switchPlayers();
     }
+    autoSave();
+
   }
 });
 
@@ -89,15 +123,15 @@ holdBtn.addEventListener("click", function () {
     document.getElementById(`score${activePlayer + 1}`).textContent = score[activePlayer];
 
     // Check if the active player's score is 100 or more
-    if (score[activePlayer] >= 100) {
+    if (score[activePlayer] >= 10) {
       // End the game if the active player has won
-      playing = false;
-      document.querySelector(`.player${activePlayer + 1}`).classList.add("player-winner");
-      document.querySelector(`.player${activePlayer + 1}`).classList.remove("player-active");
+      winners();
     } else {
       // Switch to the other player if no one has won yet
       switchPlayers();
     }
+    autoSave();
+
   }
 });
 
@@ -106,3 +140,34 @@ holdBtn.addEventListener("click", function () {
  * Resets the game state to the initial values.
  */
 newGameBtn.addEventListener("click", starter);
+
+//auto save func
+function autoSave() {
+  const gameState = {
+    score: score,
+    currentScore: currentScore,
+    activePlayer: activePlayer,
+    playing: playing
+  };
+  localStorage.setItem("gameState", JSON.stringify(gameState));
+}
+
+//saveGame.addEventListener('click', autosave)
+
+
+window.addEventListener('load', loadGame);
+
+
+function winners(params) {
+  if (score[activePlayer] >= 10) {
+    win_count = [document.getElementById('count1'), document.getElementById('count2')]
+    let counter = parseInt(win_count[activePlayer].textContent)|| 0 
+    win_count[activePlayer].textContent = counter + 1;
+    console.log(typeof win_count[activePlayer].textContent)
+    playing = false; 
+    starter();
+  }
+}
+
+winners();
+
