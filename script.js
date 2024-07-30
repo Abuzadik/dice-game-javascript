@@ -161,10 +161,10 @@ window.addEventListener('load', loadGame);
 function winners(params) {
   if (score[activePlayer] >= 10) {
     win_count = [document.getElementById('count1'), document.getElementById('count2')]
-    let counter = parseInt(win_count[activePlayer].textContent)|| 0 
+    let counter = parseInt(win_count[activePlayer].textContent) || 0
     win_count[activePlayer].textContent = counter + 1;
     console.log(typeof win_count[activePlayer].textContent)
-    playing = false; 
+    playing = false;
     starter();
   }
 }
